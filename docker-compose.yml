@@ -1,9 +1,10 @@
 version: '3.8'
+
 services:
  postgres:
   container_name: postgres-microservice
   image: postgres
-  restart: always
+  restart: "no"
   environment:
    POSTGRES_USER: "microservice"
    POSTGRES_PASSWORD: "microservice"
@@ -16,6 +17,7 @@ services:
    - ./bd_init:/docker-entrypoint-initdb.d/
   networks:
    - microservice-network
+
  pgadmin:
   container_name: pgadmin-microservice
   image: dpage/pgadmin4
@@ -25,8 +27,10 @@ services:
    PGADMIN_DEFAULT_PASSWORD: "microservice"
   ports:
    - "15432:80"
+
   networks:
    - microservice-network
+
 networks:
  microservice-network:
   driver: bridge
